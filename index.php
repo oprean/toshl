@@ -1,6 +1,6 @@
 <?php
+require_once 'php/utils.php';
 require_once 'php/Toshl.php';
-require_once 'php/CJSON.php';
 $toshl = new Toshl('toshl_export.csv');
 $tags = array(
 	'mancare', 
@@ -16,7 +16,9 @@ $year = 2014;
 foreach ($tags as $tag) {
 	$data[] = $toshl->aggregateTagYear($tag, $year);	
 }
+//dump($data);
 $jsData = 'var toshData = '.CJSON::encode($data);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +48,8 @@ $jsData = 'var toshData = '.CJSON::encode($data);
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="img/favicon.png">
-<script>
-<?php
-echo $jsData;
-?> 
+	<script>
+		<?php echo $jsData;	?> 
 	</script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>

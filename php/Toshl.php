@@ -101,5 +101,18 @@ class Toshl {
 		
 		return $aggregatedData;
 	}
+	
+	public function aggregateTagYears($tag, $year) {
+		$year = empty($year)?date('Y'):$year;
+		$aggregatedData = array();
+		$months = range(1, 12);
+		foreach ($months as $month) {
+			$data = $this->tagmonth($tag, $month, $year);
+			$aggregatedData['data'][] = $data[count($data)-1];
+		}
+		$aggregatedData['name'] = $tag;
+		
+		return $aggregatedData;
+	}
 } 
 ?>
